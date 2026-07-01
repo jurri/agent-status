@@ -1,0 +1,133 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Agent Status Settings</title>
+
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      background: #202020;
+      color: #ffffff;
+      padding: 14px;
+    }
+
+    label {
+      display: block;
+      margin-top: 14px;
+      font-size: 12px;
+      opacity: 0.85;
+    }
+
+    input {
+      box-sizing: border-box;
+      width: 100%;
+      margin-top: 4px;
+      padding: 7px;
+      border: 1px solid #555;
+      border-radius: 4px;
+      background: #111;
+      color: white;
+    }
+
+    button {
+      margin-top: 16px;
+      padding: 8px 12px;
+      border: 0;
+      border-radius: 4px;
+      background: #2563eb;
+      color: white;
+      cursor: pointer;
+    }
+
+    small {
+      display: block;
+      margin-top: 12px;
+      color: #bbbbbb;
+      line-height: 1.4;
+    }
+  </style>
+</head>
+
+<body>
+  <label>Status file</label>
+  <input id="statusFile" placeholder="%USERPROFILE%\.agent-status.json" />
+
+  <label>Command on key press</label>
+  <input id="pressCommand" placeholder="optional command, e.g. claude, codex, .cmd" />
+
+  <button id="save">Save</button>
+
+  <small>
+    Default status file:<br>
+    %USERPROFILE%\.agent-status.json<br><br>
+    Leave fields empty to use defaults.
+  </small>
+
+  <script>
+    let websocket = null;
+    let context = null;
+    let action = null;
+
+    window.connectElgatoStreamDeckSocket = function (
+      port,
+      uuid,
+      registerEvent,
+      info,
+      actionInfo
+    ) {
+      const parsedActionInfo = JSON.parse(actionInfo);
+
+      action = parsedActionInfo.action;
+      context = parsedActionInfo.context;
+
+      websocket = new WebSocket("ws://127.0.0.1:" + port);
+
+      websocket.onopen = function () {
+        websocket.send(JSON.stringify({
+          event: registerEvent,
+          uuid: uuid
+        }));
+
+        websocket.send(JSON.stringify({
+          event: "getSettings",
+          context: context,
+          action: action
+        }));
+      };
+
+      websocket.onmessage = function (message) {
+        const data = JSON.parse(message.data);
+
+        if (data.event !== "didReceiveSettings") {
+          return;
+        }
+
+        const settings = data.payload.settings || {};
+
+        document.getElementById("statusFile").value =
+          settings.statusFile || "";
+
+        document.getElementById("pressCommand").value =
+          settings.pressCommand || "";
+      };
+    };
+
+    document.getElementById("save").addEventListener("click", function () {
+      if (!websocket || websocket.readyState !== WebSocket.OPEN) {
+        return;
+      }
+
+      websocket.send(JSON.stringify({
+        event: "setSettings",
+        context: context,
+        action: action,
+        payload: {
+          statusFile: document.getElementById("statusFile").value.trim(),
+          pressCommand: document.getElementById("pressCommand").value.trim()
+        }
+      }));
+    });
+  </script>
+</body>
+</html>
