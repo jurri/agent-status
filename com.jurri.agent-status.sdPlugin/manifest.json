@@ -1,47 +1,49 @@
 {
-	"Name": "agent-status",
-	"Version": "0.1.0.0",
-	"Author": "jurri",
-	"Actions": [
-		{
-			"Name": "Counter",
-			"UUID": "com.jurri.agent-status.increment",
-			"Icon": "imgs/actions/counter/icon",
-			"Tooltip": "Displays a count, which increments by one on press.",
-			"PropertyInspectorPath": "ui/increment-counter.html",
-			"Controllers": [
-				"Keypad"
-			],
-			"States": [
-				{
-					"Image": "imgs/actions/counter/key",
-					"TitleAlignment": "middle"
-				}
-			]
-		}
-	],
-	"Category": "agent-status",
-	"CategoryIcon": "imgs/plugin/category-icon",
-	"CodePath": "bin/plugin.js",
-	"Description": "claude-code agent status information and handle",
-	"Icon": "imgs/plugin/marketplace",
-	"SDKVersion": 3,
-	"Software": {
-		"MinimumVersion": "7.1"
-	},
-	"OS": [
-		{
-			"Platform": "mac",
-			"MinimumVersion": "12"
-		},
-		{
-			"Platform": "windows",
-			"MinimumVersion": "10"
-		}
-	],
-	"Nodejs": {
-		"Version": "24",
-		"Debug": "enabled"
-	},
-	"UUID": "com.jurri.agent-status"
+  "$schema": "https://schemas.elgato.com/streamdeck/plugins/manifest.json",
+  "UUID": "com.jurri.agent-status",
+  "Name": "Agent Status",
+  "Description": "Shows Claude Code or Codex status.",
+  "Author": "jurri",
+  "Version": "0.1.0",
+  "SDKVersion": 2,
+  "Icon": "imgs/plugin/marketplace",
+  "Category": "Development",
+  "CategoryIcon": "imgs/plugin/category-icon",
+  "CodePath": "bin/plugin.js",
+  "Nodejs": {
+    "Version": "24",
+    "Debug": "enabled"
+  },
+  "Software": {
+    "MinimumVersion": "7.1"
+  },
+  "OS": [
+    {
+      "Platform": "windows",
+      "MinimumVersion": "10"
+    },
+    {
+      "Platform": "mac",
+      "MinimumVersion": "13"
+    }
+  ],
+  "Actions": [
+    {
+      "UUID": "com.jurri.agent-status.status",
+      "Name": "Agent Status",
+      "Tooltip": "Display Claude/Codex status",
+      "Icon": "imgs/actions/status/icon",
+      "Controllers": ["Keypad"],
+      "PropertyInspectorPath": "ui/inspector.html",
+      "DisableAutomaticStates": true,
+      "States": [
+        {
+          "Image": "imgs/actions/status/key",
+          "ShowTitle": false,
+          "TitleAlignment": "middle",
+          "FontSize": 14
+        }
+      ]
+    }
+  ]
 }
