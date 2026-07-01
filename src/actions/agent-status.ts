@@ -50,22 +50,22 @@ const DEFAULT_STATUS_FILE = join(homedir(), ".agent-status.json");
 
 const COLORS: Record<AgentState, string> = {
   idle: "#22c55e",
-  working: "#3b82f6",
-  waiting: "#facc15",
-  error: "#ef4444",
+  working: "#facc15",
+  waiting: "#ef4444",
+  error: "#f97316",
   offline: "#4b5563"
 };
 
 const LABELS: Record<AgentState, string> = {
-  idle: "IDLE",
-  working: "WORK",
-  waiting: "WAIT",
+  idle: "READY",
+  working: "CODE",
+  waiting: "?",
   error: "ERR",
   offline: "OFF"
 };
 
 @action({
-  UUID: "com.jaydee.agent-status.status"
+  UUID: "com.jurri.agent-status.status"
 })
 export class AgentStatusAction extends SingletonAction<Settings> {
   private timer?: NodeJS.Timeout;

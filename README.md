@@ -7,12 +7,12 @@ com.jurri.agent-status
 ```
 Action UUID:
 ```text
-com.jaydee.agent-status.status
+com.jurri.agent-status.status
 ```
 
 ## Installieren / bauen / linken
 ```shell
-cd C:\Users\JuriDerewjanko\dev\Tools\streamdeck\agentstatus\agent-status
+cd C:\Users\JuriDerewjanko\dev\Tools\streamdeck\agent-status
 
 npm install
 npm run build
