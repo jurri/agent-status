@@ -4,7 +4,7 @@ import terser from "@rollup/plugin-terser";
 import typescript from "@rollup/plugin-typescript";
 
 const isWatching = !!process.env.ROLLUP_WATCH;
-const pluginFolder = "com.jaydee.agent-status.sdPlugin";
+const pluginFolder = "com.jurri.agent-status.sdPlugin";
 
 export default {
   input: "src/plugin.ts",

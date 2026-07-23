@@ -4,7 +4,7 @@
   "Name": "Agent Status",
   "Description": "Shows Claude Code or Codex status.",
   "Author": "jurri",
-  "Version": "0.1.0",
+  "Version": "0.1.0.0",
   "SDKVersion": 2,
   "Icon": "imgs/plugin/marketplace",
   "Category": "Development",
