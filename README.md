@@ -12,7 +12,8 @@ com.jurri.agent-status.status
 
 ## Installieren / bauen / linken
 ```shell
-cd C:\Users\JuriDerewjanko\dev\Tools\streamdeck\agent-status
+git clone https://github.com/jurri/agent-status.git
+cd agent-status
 
 npm install
 npm run build
@@ -31,11 +32,9 @@ npm run set:error
 npm run set:offline
 ```
 
-
-
 ## Statusdatei
 
-Pfad: `C:\Users\JuriDerewjanko\.agent-status.json`
+Pfad: `~\.agent-status.json`
 
 Beispiel:
 ```json
